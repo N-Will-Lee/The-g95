@@ -1,21 +1,18 @@
 <template>
     <div class="personProfile">
         <h1>The G95-WebPage</h1>
-    <b-container class="jobContainer">
-      <div class="jobs" v-if="data && data.length" v-for="(data, index)  in data" v-bind:key='"data" + index' :data='data'>
-        <b-row class="text-center">
-          <b-card bg-variant="info" text-variant="white" class="text-center">
-            <b-col class="card-text">
-              <h4>{{firstName}} {{lastName}}</h4>
-            </b-col>
-           
-            <div class="buttons">
-              <b-button class="requesttheJob">Request Job</b-button>
+    
+      <div class="jobs" v-if="data && data.length" v-for="(person, index)  in data" v-bind:key='"person" + index' :person='person'>
+      
+          
+            <div class="card-text">
+              <h4>{{person.firstName}} {{person.lastName}}</h4>
+              <img class="g95" height="350" width="350" v-bind:src="person.imgUrl">
             </div>
-          </b-card>
-        </b-row>
+      
+        
       </div>
-    </b-container>
+    
   </div>
 </template>
 
@@ -31,10 +28,11 @@ export default {
         }
     },
     mounted () {
-    axios.get(this.apiURL)
+        axios.get(this.apiURL)
     .then(response => {
-      console.log(response.data.data)
-      this.data = response.data
+    //   console.log(response.data.data.person[0].firstName)
+      this.data = response.data.data
+    //   console.log(data.firstName[0])
     }) 
   }
     
